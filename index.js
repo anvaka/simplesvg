@@ -1,4 +1,5 @@
 module.exports = svg;
+svg.compile = require('./lib/compile');
 
 var svgns = "http://www.w3.org/2000/svg";
 var xlinkns = "http://www.w3.org/1999/xlink";
@@ -8,19 +9,18 @@ function svg(element) {
 
   if (typeof element === "string") {
     svgElement = window.document.createElementNS(svgns, element);
+  } else if (element.simplesvg) {
+    return element;
   }
 
-  var api = {
-    attr: attr,
-    append: append,
-    element: svgElement
-  };
+  svgElement.simplesvg = true; // this is not good, since we are monkey patching svg
+  svgElement.attr = attr;
+  svgElement.append = append;
 
-  return api;
+  return svgElement;
 
-  function append(element) {
-    var child = svg(element);
-    svgElement.appendChild(child.element);
+  function append(child) {
+    svgElement.appendChild(svg(child));
 
     return child;
   }
@@ -33,7 +33,7 @@ function svg(element) {
         svgElement.removeAttributeNS(null, name);
       }
 
-      return api;
+      return svgElement;
     }
 
     return svgElement.getAttributeNS(null, name);
