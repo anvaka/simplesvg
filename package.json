@@ -15,5 +15,8 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/anvaka/simplesvg"
+  },
+  "dependencies": {
+    "add-event-listener": "0.0.1"
   }
 }

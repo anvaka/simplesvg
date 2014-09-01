@@ -1,6 +1,8 @@
 module.exports = svg;
 svg.compile = require('./lib/compile');
 
+var domEvents = require('add-event-listener');
+
 var svgns = "http://www.w3.org/2000/svg";
 var xlinkns = "http://www.w3.org/1999/xlink";
 
@@ -16,6 +18,17 @@ function svg(element) {
   svgElement.simplesvg = true; // this is not good, since we are monkey patching svg
   svgElement.attr = attr;
   svgElement.append = append;
+
+  // add easy eventing
+  svgElement.on = function (name, cb, useCapture) {
+    domEvents.addEventListener(svgElement, name, cb, useCapture);
+    return svgElement;
+  };
+
+  svgElement.off = function (name, cb, useCapture) {
+    domEvents.removeEventListener(svgElement, name, cb, useCapture);
+    return svgElement;
+  };
 
   return svgElement;
 
