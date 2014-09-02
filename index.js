@@ -1,5 +1,8 @@
 module.exports = svg;
+
 svg.compile = require('./lib/compile');
+
+var compileTemplate = svg.compileTemplate = require('./lib/compileTemplate');
 
 var domEvents = require('add-event-listener');
 
@@ -15,22 +18,35 @@ function svg(element) {
     return element;
   }
 
+  var compiledTempalte;
+
   svgElement.simplesvg = true; // this is not good, since we are monkey patching svg
   svgElement.attr = attr;
   svgElement.append = append;
 
   // add easy eventing
-  svgElement.on = function (name, cb, useCapture) {
-    domEvents.addEventListener(svgElement, name, cb, useCapture);
-    return svgElement;
-  };
+  svgElement.on = on;
+  svgElement.off = off;
 
-  svgElement.off = function (name, cb, useCapture) {
-    domEvents.removeEventListener(svgElement, name, cb, useCapture);
-    return svgElement;
-  };
+  // data binding:
+  svgElement.dataSource = dataSource;
 
   return svgElement;
+
+  function dataSource(model) {
+    if (!compiledTempalte) compiledTempalte = compileTemplate(svgElement);
+    compiledTempalte.link(model);
+  }
+
+  function on(name, cb, useCapture) {
+    domEvents.addEventListener(svgElement, name, cb, useCapture);
+    return svgElement;
+  }
+
+  function off(name, cb, useCapture) {
+    domEvents.removeEventListener(svgElement, name, cb, useCapture);
+    return svgElement;
+  }
 
   function append(child) {
     svgElement.appendChild(svg(child));
