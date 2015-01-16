@@ -48,8 +48,9 @@ function svg(element) {
     return svgElement;
   }
 
-  function append(child) {
-    svgElement.appendChild(svg(child));
+  function append(element) {
+    var child = svg(child);
+    svgElement.appendChild(child);
 
     return child;
   }
