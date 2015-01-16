@@ -23,6 +23,7 @@ function svg(element) {
   svgElement.simplesvg = true; // this is not good, since we are monkey patching svg
   svgElement.attr = attr;
   svgElement.append = append;
+  svgElement.link = link;
 
   // add easy eventing
   svgElement.on = on;
@@ -67,5 +68,14 @@ function svg(element) {
     }
 
     return svgElement.getAttributeNS(null, name);
+  }
+
+  function link(target) {
+    if (arguments.length) {
+      svgElement.setAttributeNS(xlinkns, "xlink:href", target);
+      return svgElement;
+    }
+
+    return svgElement.getAttributeNS(xlinkns, "xlink:href");
   }
 }
