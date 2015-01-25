@@ -24,6 +24,7 @@ function svg(element) {
   svgElement.attr = attr;
   svgElement.append = append;
   svgElement.link = link;
+  svgElement.text = text;
 
   // add easy eventing
   svgElement.on = on;
@@ -77,5 +78,13 @@ function svg(element) {
     }
 
     return svgElement.getAttributeNS(xlinkns, "xlink:href");
+  }
+
+  function text(textContent) {
+    if (textContent !== undefined) {
+        svgElement.textContent = textContent;
+        return svgElement;
+    }
+    return svgElement.textContent;
   }
 }
