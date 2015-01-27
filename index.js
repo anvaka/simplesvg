@@ -38,6 +38,7 @@ function svg(element) {
   function dataSource(model) {
     if (!compiledTempalte) compiledTempalte = compileTemplate(svgElement);
     compiledTempalte.link(model);
+    return svgElement;
   }
 
   function on(name, cb, useCapture) {
