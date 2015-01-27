@@ -9,7 +9,27 @@ var domEvents = require('add-event-listener');
 var svgns = "http://www.w3.org/2000/svg";
 var xlinkns = "http://www.w3.org/1999/xlink";
 
-function svg(element) {
+function svg(element, attrBag) {
+  var svgElement = augment(element);
+  if (attrBag === undefined) {
+    return svgElement;
+  }
+
+  var attributes = Object.keys(attrBag);
+  for (var i = 0; i < attributes.length; ++i) {
+    var attributeName = attributes[i];
+    var value = attrBag[attributeName];
+    if (attributeName === 'link') {
+      svgElement.link(value);
+    } else {
+      svgElement.attr(attributeName, value);
+    }
+  }
+
+  return svgElement;
+}
+
+function augment(element) {
   var svgElement = element;
 
   if (typeof element === "string") {
