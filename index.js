@@ -2,7 +2,7 @@ module.exports = svg;
 
 svg.compile = require('./lib/compile');
 
-var compileTemplate = svg.compileTemplate = require('./lib/compileTemplate');
+var compileTemplate = svg.compileTemplate = require('./lib/compile_template');
 
 var domEvents = require('add-event-listener');
 
