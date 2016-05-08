@@ -15,16 +15,7 @@ function svg(element, attrBag) {
     return svgElement;
   }
 
-  var attributes = Object.keys(attrBag);
-  for (var i = 0; i < attributes.length; ++i) {
-    var attributeName = attributes[i];
-    var value = attrBag[attributeName];
-    if (attributeName === 'link') {
-      svgElement.link(value);
-    } else {
-      svgElement.attr(attributeName, value);
-    }
-  }
+  svgElement.attr(attrBag);
 
   return svgElement;
 }
@@ -88,8 +79,26 @@ function augment(element) {
 
       return svgElement;
     }
+    if (typeof name === 'string') {
+      // someone wants to get value of an attribute:
+      return svgElement.getAttributeNS(null, name);
+    }
 
-    return svgElement.getAttributeNS(null, name);
+    if (typeof name !== 'object') throw new Error('attr() expects to have either string or object as first argument');
+
+    var attrBag = name;
+    var attributes = Object.keys(attrBag);
+    for (var i = 0; i < attributes.length; ++i) {
+      var attributeName = attributes[i];
+      var value = attrBag[attributeName];
+      if (attributeName === 'link') {
+        svgElement.link(value);
+      } else {
+        svgElement.attr(attributeName, value);
+      }
+    }
+
+    return svgElement;
   }
 
   function link(target) {
