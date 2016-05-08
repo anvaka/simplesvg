@@ -4,7 +4,8 @@
   "description": "A very simple svg wrapper, inspired by original vivagraph",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "browserify -s sivg ./index.js > dist/simplesvg.js && uglifyjs dist/simplesvg.js > dist/simplesvg.min.js"
   },
   "keywords": [
     "svg",
