@@ -1,6 +1,6 @@
 {
   "name": "simplesvg",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A very simple svg wrapper, inspired by original vivagraph",
   "main": "index.js",
   "scripts": {
