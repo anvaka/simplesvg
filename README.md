@@ -4,11 +4,23 @@ A very simple svg wrapper, inspired by original vivagraph
 
 # usage
 
-This API is still not very stable. But here is quick example:
+You can grab it from CDN:
+
+``` html
+<script src='https://cdn.jsdelivr.net/npm/simplesvg@0.1.1/dist/simplesvg.min.js'></script>
+```
+
+Or get it via npm:
+
+```
+npm i simplesvg
+```
+
+And then use it like so:
 
 ``` js
-var svg = require('simplesvg');
-var circle = svg('circle', {
+var sivg = require('simplesvg'); // sivg is available as global variable in CDN distribution
+var circle = sivg('circle', {
   r: 21,
   cx: 42,
   cy: 42,
