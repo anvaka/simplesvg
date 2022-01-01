@@ -29,7 +29,7 @@ function augment(element) {
     return element;
   }
 
-  var compiledTempalte;
+  var compiledTemplate;
 
   svgElement.simplesvg = true; // this is not good, since we are monkey patching svg
   svgElement.attr = attr;
@@ -47,8 +47,8 @@ function augment(element) {
   return svgElement;
 
   function dataSource(model) {
-    if (!compiledTempalte) compiledTempalte = compileTemplate(svgElement);
-    compiledTempalte.link(model);
+    if (!compiledTemplate) compiledTemplate = compileTemplate(svgElement);
+    compiledTemplate.link(model);
     return svgElement;
   }
 
