@@ -21,5 +21,8 @@
   },
   "dependencies": {
     "add-event-listener": "0.0.1"
+  },
+  "devDependencies": {
+    "uglifyjs": "^2.4.11"
   }
 }
